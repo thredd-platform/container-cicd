@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^Containerfile$"],
+      "matchStrings": ["ghcr\\.io/jqlang/jq:(?<currentValue>[\\d.]+)"],
+      "depNameTemplate": "jqlang/jq",
+      "datasourceTemplate": "github-releases",
+      "packageNameTemplate": "jqlang/jq",
+      "extractVersionTemplate": "^jq-(?<version>.*)$",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^Containerfile$"],
+      "matchStrings": ["registry\\.k8s\\.io/kubectl:v(?<currentValue>[\\d.]+)"],
+      "depNameTemplate": "kubectl",
+      "datasourceTemplate": "github-tags",
+      "packageNameTemplate": "kubernetes/kubernetes",
+      "extractVersionTemplate": "^v(?<version>.*)$",
+      "versioningTemplate": "semver"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDepNames": ["debian"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["ghcr.io/thredd-platform/**"],
+      "enabled": false
+    }
+  ]
+}
