@@ -5,10 +5,10 @@ COPY --from=docker.io/amazon/aws-cli:latest /usr/local/aws-cli /usr/local/aws-cl
 ENV PATH="/usr/local/aws-cli/v2/current/bin:$PATH"
 
 # Setup JQ
-COPY --link --from=ghcr.io/jqlang/jq:1.8.1 /jq /usr/local/bin/jq
+COPY --from=ghcr.io/jqlang/jq:1.8.1 /jq /usr/local/bin/jq
 
 # Setup Kubectl
-COPY --link --from=registry.k8s.io/kubectl:v1.35.3 /bin/kubectl /usr/local/bin/kubectl
+COPY --from=registry.k8s.io/kubectl:v1.35.3 /bin/kubectl /usr/local/bin/kubectl
 
 # Setup Python
 COPY --from=ghcr.io/thredd-platform/oci-python:latest / /
